@@ -9,6 +9,7 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
+        <OtherUnitFiles Value="src"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -17,7 +18,7 @@
     <Version Release="1"/>
     <Files>
       <Item>
-        <Filename Value="invoice_pdf.pas"/>
+        <Filename Value="src\invoice_pdf.pas"/>
         <UnitName Value="invoice_pdf"/>
       </Item>
     </Files>
