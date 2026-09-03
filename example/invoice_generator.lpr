@@ -124,13 +124,13 @@ end;
 
 procedure TGeneratorApp.DoRun;
 var
-  ErrorMsg: string;
-  OutputFile: string;
+  aErrorMsg: string;
+  aOutputFile: string;
 begin
-  ErrorMsg := CheckOptions('ho:n:', 'help output: number:');
-  if ErrorMsg <> '' then
+  aErrorMsg := CheckOptions('ho:n:', 'help output: number:');
+  if aErrorMsg <> '' then
   begin
-    ShowException(Exception.Create(ErrorMsg));
+    ShowException(Exception.Create(aErrorMsg));
     Terminate;
     Exit;
   end;
@@ -144,12 +144,12 @@ begin
 
   // Имя выходного файла
   if HasOption('o', 'output') then
-    OutputFile := GetOptionValue('o', 'output')
+    aOutputFile := GetOptionValue('o', 'output')
   else
-    OutputFile := 'schet_test.pdf';
+    aOutputFile := 'invoice_test.pdf';
 
   try
-    GenerateTestInvoice(OutputFile);
+    GenerateTestInvoice(aOutputFile);
   except
     on E: Exception do
     begin
