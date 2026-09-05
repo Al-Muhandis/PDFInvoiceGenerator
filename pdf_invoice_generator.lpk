@@ -15,7 +15,7 @@
     </CompilerOptions>
     <Description Value="PDF генератор счета без лишних зависимостей"/>
     <License Value="MIT"/>
-    <Version Release="1"/>
+    <Version Release="2"/>
     <Files>
       <Item>
         <Filename Value="src\invoice_pdf.pas"/>
