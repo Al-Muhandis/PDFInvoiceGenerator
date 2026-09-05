@@ -12,15 +12,15 @@ type
   TInvoiceItem = class(TCollectionItem)
   private
     fName: string;
-    fPrice: Currency;
+    fPrice: Double;
     fQuantity: Double;
     fUnitName: string;
   public
-    function Amount: Currency;
+    function Amount: Double;
     property Name: string read fName write fName;
     property Quantity: Double read fQuantity write fQuantity;
     property UnitName: string read fUnitName write fUnitName;
-    property Price: Currency read fPrice write fPrice;
+    property Price: Double read fPrice write fPrice;
   end;
 
   { TBankDetails }
@@ -41,8 +41,8 @@ type
   TInvoiceCollection = class(TCollection)
   public
     constructor Create;
-    function GetItem(Index: Integer): TInvoiceItem;
-    property Items[Index: Integer]: TInvoiceItem read GetItem; default;
+    function GetItem(aIndex: Integer): TInvoiceItem;
+    property Items[aIndex: Integer]: TInvoiceItem read GetItem; default;
   end;
 
   { TParty }
@@ -79,10 +79,9 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    procedure AddItem(const aName: string; aQuantity: Double;
-                      const aUnitName: string; aPrice: Currency);
+    procedure AddItem(const aName: string; aQuantity: Double; const aUnitName: string; aPrice: Double);
 
-    function TotalAmount: Currency;
+    function TotalAmount: Double;
 
     property Number: Integer read fNumber write fNumber;
     property Date: TDate read fDate write fDate;
@@ -165,7 +164,7 @@ end;
 // Сумма прописью (рубли / копейки)
 // ---------------------------------------------------------------------------
 
-function SumInWords(Amount: Currency): string;
+function SumInWords(Amount: Double): string;
 const
   aOnes: array[0..9] of string = ('', 'один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять');
   aOnesF: array[0..9] of string = ('', 'одна', 'две', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять');
@@ -250,7 +249,7 @@ end;
 
 { TInvoiceItem }
 
-function TInvoiceItem.Amount: Currency;
+function TInvoiceItem.Amount: Double;
 begin
   Result := fQuantity * fPrice;
 end;
@@ -262,9 +261,9 @@ begin
   inherited Create(TInvoiceItem);
 end;
 
-function TInvoiceCollection.GetItem(Index: Integer): TInvoiceItem;
+function TInvoiceCollection.GetItem(aIndex: Integer): TInvoiceItem;
 begin
-  Result := inherited Items[Index] as TInvoiceItem;
+  Result := inherited Items[aIndex] as TInvoiceItem;
 end;
 
 { TInvoice }
@@ -290,8 +289,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TInvoice.AddItem(const aName: string; aQuantity: Double;
-  const aUnitName: string; aPrice: Currency);
+procedure TInvoice.AddItem(const aName: string; aQuantity: Double; const aUnitName: string; aPrice: Double);
 var
   aItem: TInvoiceItem;
 begin
@@ -302,7 +300,7 @@ begin
   aItem.Price := aPrice;
 end;
 
-function TInvoice.TotalAmount: Currency;
+function TInvoice.TotalAmount: Double;
 var
   i: Integer;
 begin
